@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Check-in</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="card">
+        <div class="text-center">
+            <h1>Daily Check-in</h1>
+            <div class="status-badge status-pending" id="status-badge">Pending for Today</div>
+            <p class="subtitle" id="date-display">Loading date...</p>
+            
+            <div class="location-badge">
+                <span>📍</span> Acquiring location...
+            </div>
+        </div>
+
+        <div class="camera-container" id="camera-box">
+            <!-- Placeholder for actual camera feed -->
+            <div class="camera-icon">📷</div>
+            <div class="camera-label">
+                Camera Access Required
+            </div>
+        </div>
+
+        <button class="btn" id="checkin-btn" onclick="completeCheckin()">
+            Capture Selfie & Check In
+        </button>
+        <a href="index.html" class="link" style="color: #dc3545; margin-top: 1.5rem;">Sign Out</a>
+    </div>
+
+    <script>
+        // Set today's date dynamically
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('date-display').textContent = new Date().toLocaleDateString('en-US', options);
+
+        // Simulate a successful check-in
+        function completeCheckin() {
+            const btn = document.getElementById('checkin-btn');
+            const badge = document.getElementById('status-badge');
+            const cameraBox = document.getElementById('camera-box');
+            
+            // Update UI to show success
+            btn.textContent = 'Check-in Complete ✓';
+            btn.style.background = '#28a745';
+            btn.disabled = true;
+            
+            badge.textContent = 'Verified Today';
+            badge.className = 'status-badge status-success';
+            
+            cameraBox.innerHTML = '<div style="color: #28a745; font-size: 4rem;">✓</div><div class="camera-label" style="color: #155724; background: #d4edda;">Selfie Captured</div>';
+            cameraBox.style.border = '2px solid #28a745';
+            
+            alert('Selfie captured & location verified! Your daily check-in is successful.');
+        }
+    </script>
+</body>
+</html>
