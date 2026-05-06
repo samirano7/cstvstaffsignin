@@ -8,27 +8,29 @@
 </head>
 <body>
     <div class="card">
-        <div class="text-center">
-            <h1>Create Account</h1>
-            <p class="subtitle">Register to access the daily check-in portal.</p>
-        </div>
-        <form action="index.html">
+        <h1 class="text-center">Create Account</h1>
+        <p class="subtitle text-center">CSTV daily check-in</p>
+        <form action="index.html" method="get">
             <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" placeholder="E.g. Samirano" required>
+                <label for="full_name">Full Name</label>
+                <input type="text" id="full_name" name="full_name" required placeholder="e.g. Adeoso Samuel">
             </div>
-            
+           
             <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="staff@company.com" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="••••••••" required>
+                <input type="password" id="password" name="password" required placeholder="••••••••">
             </div>
-            <button type="submit" class="btn">Register Account</button>
-            <a href="index.html" class="link">Already have an account? Sign In</a>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn">Register</button>
         </form>
+        <a href="index.html" class="link">Already have an account? Sign In</a>
     </div>
 </body>
 </html>
