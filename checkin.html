@@ -3,58 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Check-in</title>
+    <title>Staff Portal - Daily Check-in</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="card">
-        <div class="text-center">
-            <h1>Daily Check-in</h1>
-            <div class="status-badge status-pending" id="status-badge">Pending for Today</div>
-            <p class="subtitle" id="date-display">Loading date...</p>
-            
-            <div class="location-badge">
-                <span>📍</span> Acquiring location...
+        <div class="checkin-header">
+            <div>
+                <h2>Welcome, Staff Member!</h2>
+                <span class="date-display" id="current-date">Loading date...</span>
             </div>
+            <span class="status-badge status-pending" id="status-badge">Pending Check-in</span>
         </div>
-
-        <div class="camera-container" id="camera-box">
-            <!-- Placeholder for actual camera feed -->
-            <div class="camera-icon">📷</div>
-            <div class="camera-label">
-                Camera Access Required
-            </div>
+        
+        <div class="camera-container" id="camera-container">
+            <span class="camera-icon" id="camera-icon">📸</span>
+            <img id="selfie-preview" alt="Selfie preview" />
         </div>
-
-        <button class="btn" id="checkin-btn" onclick="completeCheckin()">
-            Capture Selfie & Check In
-        </button>
-        <a href="index.html" class="link" style="color: #dc3545; margin-top: 1.5rem;">Sign Out</a>
+        
+        <div class="location-badge" id="location-badge">
+            📍 Acquiring Location...
+        </div>
+        
+        <p class="subtitle text-center" id="instruction-text">Please capture your selfie to check in.</p>
+        
+        <button class="btn" id="capture-btn" onclick="mockCheckIn()">Capture Selfie & Check In</button>
     </div>
 
     <script>
-        // Set today's date dynamically
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('date-display').textContent = new Date().toLocaleDateString('en-US', options);
+        // Set today's date
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', options);
 
-        // Simulate a successful check-in
-        function completeCheckin() {
-            const btn = document.getElementById('checkin-btn');
+        // Mock getting location
+        setTimeout(() => {
+            document.getElementById('location-badge').innerHTML = '📍 HQ Office (Accuracy: 5m)';
+        }, 1500);
+
+        // Mock capturing selfie and checking in
+        function mockCheckIn() {
+            const btn = document.getElementById('capture-btn');
             const badge = document.getElementById('status-badge');
-            const cameraBox = document.getElementById('camera-box');
-            
-            // Update UI to show success
-            btn.textContent = 'Check-in Complete ✓';
-            btn.style.background = '#28a745';
+            const icon = document.getElementById('camera-icon');
+            const preview = document.getElementById('selfie-preview');
+            const instruction = document.getElementById('instruction-text');
+
+            btn.textContent = 'Processing...';
             btn.disabled = true;
-            
-            badge.textContent = 'Verified Today';
-            badge.className = 'status-badge status-success';
-            
-            cameraBox.innerHTML = '<div style="color: #28a745; font-size: 4rem;">✓</div><div class="camera-label" style="color: #155724; background: #d4edda;">Selfie Captured</div>';
-            cameraBox.style.border = '2px solid #28a745';
-            
-            alert('Selfie captured & location verified! Your daily check-in is successful.');
+
+            setTimeout(() => {
+                // Change status badge
+                badge.className = 'status-badge status-success';
+                badge.textContent = 'Checked In';
+
+                // Show mock image placeholder
+                icon.style.display = 'none';
+                preview.src = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80';
+                preview.style.display = 'block';
+
+                // Update text and button
+                instruction.textContent = 'You have successfully checked in for today.';
+                btn.textContent = 'Check-in Complete';
+                btn.style.background = 'var(--badge-success-text)';
+            }, 1000);
         }
     </script>
 </body>
